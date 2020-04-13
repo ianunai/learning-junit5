@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assumptions.*;
 import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@DisplayName("When running MathUtils")
 public class MathUtilsTest {
 
     MathUtils mathUtils;
@@ -15,12 +16,26 @@ public class MathUtilsTest {
         mathUtils = new MathUtils();
     }
 
-    @Test
-    @DisplayName("Test Add Method")
-    void testAdd() {
-        int expected = 2;
-        int actual = mathUtils.add(1, 1);
-        assertEquals(expected, actual);
+    @Nested
+    @DisplayName("add method")
+    class AddTest {
+
+        @Test
+        @DisplayName("when adding two positive numbers")
+        void testAddForPositiveNumbers() {
+            int expected = 2;
+            int actual = mathUtils.add(1, 1);
+            assertEquals(expected, actual, "should return the right sum");
+        }
+
+        @Test
+        @DisplayName("when adding two negative numbers")
+        void testAddForNegativeNegative() {
+            int expected = -2;
+            int actual = mathUtils.add(-1, -1);
+            assertEquals(expected, actual, "should return the right sum");
+        }
+
     }
 
     @Test
